@@ -1,0 +1,32 @@
+a dan b adalah opsi
+
+~(1)~ 
+a. nampilin banyaknya aja:
+SELECT COUNT(title) AS 'recommended' FROM films WHERE about LIKE '%astronaut%' AND score >= 8;
+b. nampilin secara detail:
+SELECT * FROM films WHERE about LIKE '%astronaut%' AND score >= 8;
+
+~(2)~ 
+a. nampilin banyaknya aja:
+SELECT COUNT(title) AS 'jumlah_film' FROM films WHERE rating = 'R' AND replacement_cost BETWEEN 5 AND 15;
+b. nampilin secara detail:
+SELECT title,rating,replacement_cost FROM films WHERE rating = 'R' AND replacement_cost BETWEEN 5 AND 15;
+
+~(3)~ 
+a. jika setiap pembayaran tercatat, maka akan ada 2 table (1 untuk daftar transaksi, dan 1 untuk daftar anggota staff)
+SELECT staff_id,COUNT(payment_amount) AS number_of_payment,SUM(payment_amount) AS total_amount_processed FROM transaction NATURAL JOIN staffs GROUP BY staff_id ORDER BY number_of_payment DESC;
+b. jika hanya menggunakan 1 table dalam artian setiap staff sudah diketahui banyak pembayaran dan total nya:
+SELECT staff_id,number_of_payment,total_amount_processed FROM staffs ORDER BY number_of_payment;
+
+~(4)~
+SELECT rating,AVG(replacement_cost) AS replacement_cost_average FROM films GROUP BY rating;
+
+~(5)~
+SELECT customer_name,customer_email,amount_spent FROM customers ORDER BY amount_spent DESC LIMIT 5;
+
+~(6)~
+keterangan: untuk case ini ada 3 table, yaitu daftar toko, daftar film, dan rekap film apa saja yang dimiliki oleh setiap toko
+SELECT store_name,movie_title,number_of_copy FROM store_recap JOIN stores USING (store_id) JOIN movies USING (movie_id);
+
+~(7)~
+SELECT customer_name,customer_email,total_transaction FROM customers WHERE total_transaction >= 40;
